@@ -56,6 +56,7 @@ ohos_unittest("drm_framework_capi_unittest_v1_0") {
   sources = [
     "../../../../frameworks/native/test/common/src/http.cpp",
     "../../../../frameworks/native/test/unittest/src/drm_framework_dfx_unittest.cpp",
+    "../../../../frameworks/native/test/unittest/src/drm_framework_dfx_add_unittest.cpp",
     "../../../../frameworks/native/test/unittest/src/drm_framework_function_unittest.cpp",
     "../../../../frameworks/native/test/unittest/src/drm_framework_unittest.cpp",
     "../../../../services/utils/drm_dfx.cpp",
