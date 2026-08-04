@@ -71,7 +71,7 @@ Drm_ErrCode OH_MediaKeySession_GenerateMediaKeyRequest(MediaKeySession *mediaKey
     MediaKeyRequest licenseRequest;
     licenseRequest.requestType = RequestType::REQUEST_TYPE_RELEASE;
     licenseRequestInfo.mediaKeyType = (MediaKeyType)info->type;
-    licenseRequestInfo.mimeType = std::string(info->mimeType, info->mimeType + sizeof(info->mimeType));
+    licenseRequestInfo.mimeType = std::string(info->mimeType, strlen(info->mimeType));
     std::vector<uint8_t> initDataStr(info->initData, info->initData + info->initDataLen);
     licenseRequestInfo.initData = initDataStr;
     for (uint32_t i = 0; i < info->optionsCount; i++) {
