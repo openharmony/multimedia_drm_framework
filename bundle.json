@@ -26,6 +26,7 @@
               "curl",
               "safwk",
               "napi",
+              "node",
               "samgr",
               "hitrace",
               "ipc",
