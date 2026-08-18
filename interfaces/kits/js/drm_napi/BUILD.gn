@@ -63,6 +63,7 @@ ohos_shared_library("drm_napi") {
     "hitrace:libhitracechain",
     "ipc:ipc_core",
     "napi:ace_napi",
+    "node:node_header_notice",
   ]
   sanitize = {
     cfi = true
