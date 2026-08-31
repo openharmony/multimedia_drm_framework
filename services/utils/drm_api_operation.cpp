@@ -18,7 +18,8 @@
 #include <sstream>
 #include <algorithm>
 #include <cstdlib>
-#include <climits>
+#include <charconv>
+#include <system_error>
 #include <unordered_map>
 #include <functional>
 #include <mutex>
@@ -89,15 +90,20 @@ std::pair<std::string, std::string> ConfigParser::ParseKeyValue(const std::strin
 
 bool ConfigParser::TryParseInt(const std::string& str, int& out)
 {
-    char* end;
-    long val = strtol(str.c_str(), &end, 10);
-    if (*end == '\0' && end != str.c_str() && val >= INT_MIN && val <= INT_MAX) {
-        out = static_cast<int>(val);
-        return true;
-    } else {
+    if (str.empty()) {
         DRM_ERR_LOG("Invalid integer: %{public}s", str.c_str());
         return false;
     }
+    int value = 0;
+    const char *first = str.data();
+    const char *last = first + str.size();
+    auto [ptr, ec] = std::from_chars(first, last, value);
+    if (ec != std::errc() || ptr != last) {
+        DRM_ERR_LOG("Invalid integer: %{public}s", str.c_str());
+        return false;
+    }
+    out = value;
+    return true;
 }
 
 void ConfigParser::ParseReportConfig(std::istringstream &stream, ApiReportConfig &reportConfig)
