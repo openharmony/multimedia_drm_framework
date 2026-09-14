@@ -37,6 +37,7 @@ namespace {
 constexpr uint32_t MAX_LISTNER_NUM = 64;
 }
 const std::string TV_DEVICE = "tv";
+const std::string PC_DEVICE = "2in1";
 const std::string SPLIT_LINE =
     "----------------------------------------------------------------------------------------\n";
 
@@ -478,8 +479,8 @@ int32_t MediaKeySystemFactoryService::WriteDumpInfo(int32_t fd, std::string &dum
 
 void MediaKeySystemFactoryService::StartDrmNetObserver()
 {
-    DRM_CHECK_AND_RETURN_LOG(DrmHelper::GetDeviceType() == TV_DEVICE,
-                             "not TV,StartDrmNetObserver stop");
+    DRM_CHECK_AND_RETURN_LOG(DrmHelper::GetDeviceType() == TV_DEVICE || DrmHelper::GetDeviceType() == PC_DEVICE,
+                             "not TV or not PC,StartDrmNetObserver stop");
     sptr<DrmNetObserver> drmNetObserver_ = new (std::nothrow)DrmNetObserver();
     DRM_CHECK_AND_RETURN_LOG(drmNetObserver_ != nullptr, "Drm Alloc Memory Failed");
     this->drmNetObserver_ = drmNetObserver_;
