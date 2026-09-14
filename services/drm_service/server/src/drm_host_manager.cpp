@@ -45,6 +45,7 @@ const int32_t NOT_LAZY_LOADDED = -65536;
 const int32_t TIME_IN_MS = 60000;
 const int32_t QUERY_INTERVAL = 60;
 const std::string TV_DEVICE = "tv";
+const std::string PC_DEVICE = "2in1";
 const std::string AGREED_STATEMENT = "1";
 const std::string SECURE_TYPE = "secure";
 const std::string BASIC_STATEMENT_AGREED = "basic_statement_agreed";
@@ -798,7 +799,7 @@ int32_t DrmHostManager::InitGetMediaKeySystems()
 std::string DrmHostManager::QueryBasicStatement()
 {
     std::string value = "";
-    if (DrmHelper::GetDeviceType() == TV_DEVICE) {
+    if (DrmHelper::GetDeviceType() == TV_DEVICE || DrmHelper::GetDeviceType() == PC_DEVICE) {
         value = DrmHelper::GetSettingDataValue(SECURE_TYPE, BASIC_STATEMENT_AGREED);
         while (value != AGREED_STATEMENT) {
             DRM_CHECK_AND_RETURN_RET_LOG(value != INVALID_DATA, value, "QueryBasicStatement error!");
